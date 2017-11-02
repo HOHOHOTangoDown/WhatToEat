@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="@string/restaurant_has_recorded"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/restaurant_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RadioGroup
+        android:id="@+id/radio_region"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_below="@+id/restaurant_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:text="唐家"
+            android:id="@+id/radio_tangjia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radio_life_regoin"
+            android:layout_marginLeft="100dp"
+            android:text="生活区"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="20dp"
+        android:id="@+id/restaurant_list"
+        android:foregroundGravity="center"
+        android:layout_below="@+id/radio_region"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+    <EditText
+        android:id="@+id/restaurant_to_record"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/restaurant_list"
+        android:layout_width="250dp"
+        android:focusable="true"
+        android:hint="输入要记录的餐厅名字"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_save"
+        android:textSize="18sp"
+        android:text="@string/save"
+        android:layout_toRightOf="@+id/restaurant_to_record"
+        android:layout_alignTop="@+id/restaurant_to_record"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+    <Button
+        android:id="@+id/btn_start_roll"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:text="@string/start_roll"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/restaurant_to_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/roll_result"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:layout_below="@+id/btn_start_roll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_clear"
+        android:text="清空全部"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/roll_result"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

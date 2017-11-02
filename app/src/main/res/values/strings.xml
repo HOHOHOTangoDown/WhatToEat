@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">今晚吃什么</string>
+    <string name="normal_dinner">普通</string>
+    <string name="big_dinner">大餐</string>
+    <string name="restaurant_has_recorded">已记录的餐厅</string>
+    <string name="save">保存</string>
+    <string name="start_roll">开始随机</string>
+</resources>
