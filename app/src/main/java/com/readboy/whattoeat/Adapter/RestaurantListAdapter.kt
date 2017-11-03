@@ -10,21 +10,20 @@ import com.readboy.whattoeat.View.RestaurantViewHolder
 /**
  * Created by Ilystina on 2017/11/2.
  */
-class RestaurantListAdapter(val item:List<String>):RecyclerView.Adapter<RestaurantViewHolder>(){
+class RestaurantListAdapter<T>(val item: List<T>, val init: (View, T) -> Unit) : RecyclerView.Adapter<RestaurantViewHolder<T>>() {
 
-    override fun onBindViewHolder(holder: RestaurantViewHolder?, position: Int) {
-         holder!!.name.text = item[position]
+    override fun onBindViewHolder(holder: RestaurantViewHolder<T>?, position: Int) {
+        holder!!.name.text = item[position].toString()
+        holder!!.bindForecast(item[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RestaurantViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RestaurantViewHolder<T> {
         val view = View.inflate(parent!!.context, R.layout.item_restaurant, null)
-        return RestaurantViewHolder(view)
+        return RestaurantViewHolder(view, init)
     }
 
     override fun getItemCount(): Int {
         return item.count()
     }
-
-
 
 }

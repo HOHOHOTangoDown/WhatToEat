@@ -3,18 +3,23 @@ package com.readboy.whattoeat.DataRecord
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 /**
  * Created by Ilystina on 2017/11/2.
  */
 class DataBaseHelper(context: Context, val name: String, version: Int) : SQLiteOpenHelper(context, name, null, version) {
 
+    val TAG = "DataBaseHelper"
+
     override fun onCreate(db: SQLiteDatabase?) {
+        Log.d(TAG,"OnCreate")
         createDbTable(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
+        Log.d(TAG,"OnUpGrade")
+        createDbTable(db)
     }
 
     private val TABLE_NORMAL_DINNER: String = "TABLE_NORMAL_DINNER"
@@ -45,7 +50,7 @@ class DataBaseHelper(context: Context, val name: String, version: Int) : SQLiteO
                     .append(" (")
                     .append(COL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,")
                     .append(COL_RESTAURANT+" varchar(50))")
-            db.execSQL(buffer2.toString())
+            db.execSQL(buffer3.toString())
         }
     }
 

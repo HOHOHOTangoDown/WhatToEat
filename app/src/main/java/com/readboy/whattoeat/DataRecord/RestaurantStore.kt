@@ -23,7 +23,7 @@ class RestaurantStore {
                 }
 
         private fun init(): RestaurantStore {
-            var helper = DataBaseHelper(App.appContext, DB_NAME, 1)
+            var helper = DataBaseHelper(App.appContext, DB_NAME, 3)
             storeDb = helper.writableDatabase
             return RestaurantStore()
         }

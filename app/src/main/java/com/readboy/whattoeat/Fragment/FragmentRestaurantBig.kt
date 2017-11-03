@@ -1,5 +1,6 @@
 package com.readboy.whattoeat.Fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.readboy.whattoeat.Adapter.RestaurantListAdapter
 import com.readboy.whattoeat.DataRecord.RestaurantStore
 import kotlinx.android.synthetic.main.fragment_restaurant_big.*
 import com.readboy.whattoeat.R
+import kotlinx.android.synthetic.main.item_restaurant.view.*
 import java.util.*
 
 /**
@@ -36,7 +38,9 @@ class FragmentRestaurantBig:Fragment(){
     private fun initResListView(){
         var manager = LinearLayoutManager(activity)
         restaurant_list.layoutManager = manager
-        var adapter = RestaurantListAdapter(restaurants)
+        var adapter = RestaurantListAdapter(restaurants){view, s ->
+            view.restaurant_name.setTextColor(Color.RED)
+        }
         restaurant_list.adapter = adapter
         adapter.notifyDataSetChanged()
     }
