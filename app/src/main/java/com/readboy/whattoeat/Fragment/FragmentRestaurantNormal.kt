@@ -14,6 +14,7 @@ import com.readboy.whattoeat.R
 import kotlinx.android.synthetic.main.fragment_restaurant_norma.*
 import kotlinx.android.synthetic.main.item_restaurant.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -21,11 +22,13 @@ import java.util.*
  */
 class FragmentRestaurantNormal : Fragment() {
     var restaurants: ArrayList<String> = ArrayList()
+    var restaurantsGoingTo: ArrayList<String> = ArrayList()
     var region: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         restaurants = RestaurantStore.getInstance().getNormalListTangjia()
+        restaurantsGoingTo = RestaurantStore.getInstance().getNormalListTangjia()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,12 +46,16 @@ class FragmentRestaurantNormal : Fragment() {
     private fun initResListView() {
         var manager = LinearLayoutManager(activity)
         restaurant_list.layoutManager = manager
-        var adapter = RestaurantListAdapter(restaurants) { view: View, item: String ->
-
+        var adapter = RestaurantListAdapter(restaurants) { view: View, position: Int, item: String ->
             view.setOnClickListener { v ->
-                v.restaurant_name.setTextColor(Color.RED)
+                if (v.restaurant_name.currentTextColor == Color.RED) {
+                    v.restaurant_name.setTextColor(Color.GRAY)
+                    restaurantsGoingTo.add(item)
+                } else {
+                    v.restaurant_name.setTextColor(Color.RED)
+                    restaurantsGoingTo.remove(item)
+                }
             }
-
 
         }
 
@@ -91,18 +98,19 @@ class FragmentRestaurantNormal : Fragment() {
             RestaurantStore.getInstance().insertRestaurantNormalLifeRegion(name)
         }
         restaurants.add(name)
+        restaurantsGoingTo.add(name)
         restaurant_list.adapter.notifyDataSetChanged()
     }
 
     private fun startRoll() {
-        if (restaurants.size < 1) {
+        if (restaurantsGoingTo.size < 1) {
             Toast.makeText(activity, "暂时没有餐厅收录", Toast.LENGTH_SHORT).show()
             return
         }
         var random = Random()
-        var index = random.nextInt(restaurants.size)
-        if (index < restaurants.size) {
-            roll_result.text = restaurants[index]
+        var index = random.nextInt(restaurantsGoingTo.size)
+        if (index < restaurantsGoingTo.size) {
+            roll_result.text = restaurantsGoingTo[index]
         } else {
             Toast.makeText(activity, "随机出错：index is" + index, Toast.LENGTH_SHORT).show()
         }
@@ -111,11 +119,13 @@ class FragmentRestaurantNormal : Fragment() {
     private fun clearData() {
         when (region) {
             1 -> {
+                restaurantsGoingTo.clear()
                 restaurants.clear()
                 RestaurantStore.getInstance().clearNormalTangjia()
                 restaurant_list.adapter.notifyDataSetChanged()
             }
             2 -> {
+                restaurantsGoingTo.clear()
                 restaurants.clear()
                 RestaurantStore.getInstance().clearNormalLifeRegion()
                 restaurant_list.adapter.notifyDataSetChanged()
