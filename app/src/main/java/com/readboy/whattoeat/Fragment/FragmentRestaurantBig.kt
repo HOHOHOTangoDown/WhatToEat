@@ -38,7 +38,7 @@ class FragmentRestaurantBig:Fragment(){
     private fun initResListView(){
         var manager = LinearLayoutManager(activity)
         restaurant_list.layoutManager = manager
-        var adapter = RestaurantListAdapter(restaurants){view, s ->
+        var adapter = RestaurantListAdapter(restaurants){view, int, s ->
             view.restaurant_name.setTextColor(Color.RED)
         }
         restaurant_list.adapter = adapter
