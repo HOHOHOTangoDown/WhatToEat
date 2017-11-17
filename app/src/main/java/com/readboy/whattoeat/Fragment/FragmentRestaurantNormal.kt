@@ -53,7 +53,9 @@ class FragmentRestaurantNormal : Fragment() {
                     restaurantsGoingTo.add(item)
                 } else {
                     v.restaurant_name.setTextColor(Color.RED)
-                    restaurantsGoingTo.remove(item)
+                    if(restaurantsGoingTo.contains(item)){
+                        restaurantsGoingTo.remove(item)
+                    }
                 }
             }
 
@@ -69,6 +71,8 @@ class FragmentRestaurantNormal : Fragment() {
         btn_clear.setOnClickListener { v -> clearData() }
         radio_region.setOnCheckedChangeListener { group, checkedId ->
             restaurants.clear()
+            restaurantsGoingTo.clear()
+            roll_result.text = ""
             when (checkedId) {
                 R.id.radio_tangjia -> {
                     region = 1
