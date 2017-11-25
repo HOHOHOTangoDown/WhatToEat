@@ -2,6 +2,7 @@ package com.readboy.whattoeat.Fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import java.util.*
  */
 class FragmentRestaurantBig:Fragment(){
     var restaurants:ArrayList<String> = ArrayList<String>()
+    var mHandler:Handler = Handler()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         restaurants = RestaurantStore.getInstance().getBigList()
